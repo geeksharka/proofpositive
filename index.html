@@ -142,6 +142,32 @@
 </head>
 <body>
 
+<!-- PASSWORD GATE -->
+<div id="gate" style="position:fixed;inset:0;z-index:9999;background:var(--mist);display:flex;align-items:center;justify-content:center;padding:2rem;">
+  <div style="max-width:380px;width:100%;text-align:center;">
+    <p style="font-family:'Helvetica Neue',sans-serif;font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage);margin-bottom:1.5rem;">Proof Systems & Humans</p>
+    <h2 style="font-size:1.6rem;font-weight:normal;margin-bottom:0.75rem;">This page is private.</h2>
+    <p style="font-size:0.92rem;color:var(--mid);margin-bottom:2rem;">Enter the password to continue.</p>
+    <input id="gate-input" type="password" placeholder="Password" style="width:100%;padding:0.85rem 1rem;border:1px solid var(--rule);border-radius:2px;font-family:'Georgia',serif;font-size:1rem;background:white;outline:none;text-align:center;margin-bottom:0.75rem;">
+    <div id="gate-error" style="font-family:'Helvetica Neue',sans-serif;font-size:0.78rem;color:#b94a4a;margin-bottom:0.75rem;min-height:1.2em;"></div>
+    <button onclick="checkPassword()" style="width:100%;background:var(--sage);color:white;padding:0.85rem;border:none;border-radius:2px;font-family:'Helvetica Neue',sans-serif;font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;">Enter</button>
+  </div>
+</div>
+
+<script>
+  const input = document.getElementById('gate-input');
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') checkPassword(); });
+  function checkPassword() {
+    if (input.value === 'ProofiesUnite') {
+      document.getElementById('gate').style.display = 'none';
+    } else {
+      document.getElementById('gate-error').textContent = 'Incorrect password. Please try again.';
+      input.value = '';
+      input.focus();
+    }
+  }
+</script>
+
 <nav>
   <a href="#" class="nav-logo">Proof</a>
   <ul class="nav-links">
