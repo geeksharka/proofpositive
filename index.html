@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proof — Operational Intelligence for Growing Businesses</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --mist: #f4f2ee;
+    --stone: #e8e4dc;
+    --sage: #4a5c4e;
+    --sage-light: #6b7f6e;
+    --warm: #c17f4a;
+    --warm-light: #d4956a;
+    --mid: #6b6560;
+    --rule: #d4cfc6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Georgia', serif; background: var(--mist); color: var(--ink); line-height: 1.7; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--mist); border-bottom: 1px solid var(--rule);
+    padding: 0 2rem; display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo { font-size: 1.1rem; font-weight: bold; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--mid); font-family: 'Helvetica Neue', sans-serif; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta { background: var(--sage); color: white; padding: 0.5rem 1.25rem; border-radius: 2px; font-family: 'Helvetica Neue', sans-serif; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--sage-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 8rem 2rem 6rem;
+    background: var(--mist);
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-inner { max-width: 860px; margin: 0 auto; }
+  .hero-eyebrow { font-family: 'Helvetica Neue', sans-serif; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); margin-bottom: 2rem; }
+  .hero h1 { font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1.15; font-weight: normal; margin-bottom: 2rem; color: var(--ink); }
+  .hero h1 em { font-style: italic; color: var(--sage); }
+  .hero-body { font-size: 1.2rem; color: var(--mid); max-width: 600px; margin-bottom: 3rem; line-height: 1.8; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--sage); color: white; padding: 0.9rem 2rem; border-radius: 2px; text-decoration: none; font-family: 'Helvetica Neue', sans-serif; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; transition: background 0.2s; }
+  .btn-primary:hover { background: var(--sage-light); }
+  .btn-secondary { background: transparent; color: var(--ink); padding: 0.9rem 2rem; border-radius: 2px; border: 1px solid var(--rule); text-decoration: none; font-family: 'Helvetica Neue', sans-serif; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; transition: border-color 0.2s; }
+  .btn-secondary:hover { border-color: var(--ink); }
+
+  /* SECTIONS */
+  section { padding: 6rem 2rem; }
+  .section-inner { max-width: 860px; margin: 0 auto; }
+  .section-eyebrow { font-family: 'Helvetica Neue', sans-serif; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); margin-bottom: 1.5rem; }
+  .section-title { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: normal; line-height: 1.2; margin-bottom: 1.5rem; }
+  .section-body { font-size: 1.05rem; color: var(--mid); line-height: 1.85; max-width: 640px; }
+  .rule { border: none; border-top: 1px solid var(--rule); margin: 0; }
+
+  /* INSIGHT BLOCK */
+  .insight { background: var(--sage); color: white; padding: 5rem 2rem; text-align: center; }
+  .insight blockquote { max-width: 700px; margin: 0 auto; font-size: clamp(1.3rem, 3vw, 1.9rem); line-height: 1.5; font-weight: normal; font-style: italic; }
+  .insight cite { display: block; margin-top: 2rem; font-family: 'Helvetica Neue', sans-serif; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; font-style: normal; }
+
+  /* SERVICES */
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5px; background: var(--rule); border: 1px solid var(--rule); margin-top: 3rem; }
+  .service-card { background: var(--mist); padding: 2.5rem; }
+  .service-card h3 { font-size: 1rem; letter-spacing: 0.04em; margin-bottom: 0.75rem; }
+  .service-card p { font-size: 0.92rem; color: var(--mid); line-height: 1.7; }
+  .service-tag { display: inline-block; font-family: 'Helvetica Neue', sans-serif; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage); background: var(--stone); padding: 0.25rem 0.6rem; border-radius: 2px; margin-bottom: 1rem; }
+
+  /* PACKAGES */
+  .packages { background: var(--stone); }
+  .packages-intro { margin-bottom: 3rem; }
+  .package-group { margin-bottom: 4rem; }
+  .package-group-title { font-family: 'Helvetica Neue', sans-serif; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid); border-bottom: 1px solid var(--rule); padding-bottom: 0.75rem; margin-bottom: 2rem; }
+  .package-list { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .package-item { background: var(--mist); padding: 1.75rem 2rem; display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 1rem; }
+  .package-item:hover { background: white; }
+  .package-name { font-size: 1rem; margin-bottom: 0.4rem; letter-spacing: 0.02em; }
+  .package-desc { font-size: 0.88rem; color: var(--mid); line-height: 1.6; }
+  .package-price { text-align: right; white-space: nowrap; }
+  .package-price .amount { font-size: 1rem; color: var(--sage); font-family: 'Helvetica Neue', sans-serif; }
+  .package-price .period { font-family: 'Helvetica Neue', sans-serif; font-size: 0.72rem; color: var(--mid); display: block; }
+
+  /* CHAIR CARDS */
+  .chair-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5px; background: var(--rule); border: 1px solid var(--rule); margin-top: 2rem; }
+  .chair-card { background: var(--mist); padding: 2.5rem; }
+  .chair-card.featured { background: var(--sage); color: white; }
+  .chair-card.featured .chair-role, .chair-card.featured .chair-desc { color: rgba(255,255,255,0.75); }
+  .chair-card.featured .chair-price { color: white; }
+  .chair-name { font-size: 1.05rem; margin-bottom: 0.3rem; }
+  .chair-role { font-family: 'Helvetica Neue', sans-serif; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); margin-bottom: 1rem; }
+  .chair-desc { font-size: 0.88rem; color: var(--mid); line-height: 1.65; margin-bottom: 1.5rem; }
+  .chair-price { font-family: 'Helvetica Neue', sans-serif; font-size: 0.88rem; color: var(--sage); }
+
+  /* EVENTS */
+  .events-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+  @media (max-width: 640px) { .events-grid { grid-template-columns: 1fr; } }
+  .event-card { border: 1px solid var(--rule); padding: 2.5rem; }
+  .event-card.invite-only { border-color: var(--sage); background: white; }
+  .event-name { font-size: 1.2rem; margin-bottom: 0.4rem; }
+  .event-tag { font-family: 'Helvetica Neue', sans-serif; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage); margin-bottom: 1.25rem; display: block; }
+  .event-desc { font-size: 0.92rem; color: var(--mid); line-height: 1.7; }
+  .event-price { margin-top: 1.5rem; font-family: 'Helvetica Neue', sans-serif; font-size: 0.82rem; color: var(--ink); }
+
+  /* WHO WE SERVE */
+  .signal-list { margin-top: 2.5rem; display: grid; gap: 1rem; }
+  .signal-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1.25rem 1.5rem; background: white; border: 1px solid var(--rule); }
+  .signal-marker { color: var(--sage); font-size: 1.2rem; line-height: 1; margin-top: 0.15rem; flex-shrink: 0; }
+  .signal-text { font-size: 0.95rem; color: var(--mid); line-height: 1.65; }
+
+  /* CTA */
+  .cta-section { background: var(--ink); color: white; text-align: center; padding: 7rem 2rem; }
+  .cta-section h2 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: normal; margin-bottom: 1.5rem; line-height: 1.2; }
+  .cta-section p { color: rgba(255,255,255,0.65); font-size: 1.05rem; max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.8; }
+  .btn-light { background: white; color: var(--ink); padding: 1rem 2.5rem; border-radius: 2px; text-decoration: none; font-family: 'Helvetica Neue', sans-serif; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; transition: opacity 0.2s; display: inline-block; }
+  .btn-light:hover { opacity: 0.85; }
+
+  /* FOOTER */
+  footer { background: var(--ink); color: rgba(255,255,255,0.4); padding: 2rem; text-align: center; font-family: 'Helvetica Neue', sans-serif; font-size: 0.78rem; letter-spacing: 0.04em; border-top: 1px solid rgba(255,255,255,0.1); }
+
+  /* FORM */
+  .form-section { background: white; }
+  .form-wrap { max-width: 560px; margin: 0 auto; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2.5rem; }
+  @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group.full { grid-column: 1 / -1; }
+  label { font-family: 'Helvetica Neue', sans-serif; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); }
+  input, select, textarea { padding: 0.75rem 1rem; border: 1px solid var(--rule); border-radius: 2px; font-family: 'Georgia', serif; font-size: 0.95rem; color: var(--ink); background: var(--mist); transition: border-color 0.2s; outline: none; }
+  input:focus, select:focus, textarea:focus { border-color: var(--sage); background: white; }
+  textarea { resize: vertical; min-height: 100px; }
+  .form-submit { margin-top: 1.5rem; }
+  .form-submit button { background: var(--sage); color: white; padding: 0.9rem 2.5rem; border: none; border-radius: 2px; font-family: 'Helvetica Neue', sans-serif; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+  .form-submit button:hover { background: var(--sage-light); }
+  .form-note { font-size: 0.82rem; color: var(--mid); margin-top: 1rem; font-family: 'Helvetica Neue', sans-serif; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Proof</a>
+  <ul class="nav-links">
+    <li><a href="#what-we-do">What We Do</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#chairs">Leadership</a></li>
+    <li><a href="#events">Events</a></li>
+  </ul>
+  <a href="#start" class="nav-cta">Start a Conversation</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Proof Systems & Humans</p>
+    <h1>Your business has outgrown<br>how it <em>operates.</em></h1>
+    <p class="hero-body">We work with owner-led businesses as their ongoing operations partner — the trusted advisor for how your company actually runs. Like your accountant, but for everything else.</p>
+    <div class="hero-actions">
+      <a href="#start" class="btn-primary">Start a Conversation</a>
+      <a href="#what-we-do" class="btn-secondary">How We Work</a>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- WHAT WE DO -->
+<section id="what-we-do">
+  <div class="section-inner">
+    <p class="section-eyebrow">The Gap We Fill</p>
+    <h2 class="section-title">You have an accountant, an attorney, a financial advisor.<br>Who owns how your business runs?</h2>
+    <p class="section-body">For most growing businesses, the honest answer is nobody. Operations, systems, technology decisions, AI adoption — these fall to whoever has time, or to the owner by default. That gap is expensive. It shows up as workarounds, dropped balls, good people doing frustrating work, and technology decisions made in the dark.</p>
+    <p class="section-body" style="margin-top:1.25rem;">We call it operational drift. We fix it — and we stay to make sure it doesn't come back.</p>
+  </div>
+</section>
+
+<div class="insight">
+  <blockquote>
+    "The most expensive gap in your leadership team is the one nobody has a name for."
+    <cite>— Proof Systems & Humans</cite>
+  </blockquote>
+</div>
+
+<!-- WHO THIS IS FOR -->
+<section>
+  <div class="section-inner">
+    <p class="section-eyebrow">Who We Work With</p>
+    <h2 class="section-title">You might be ready for Proof if...</h2>
+    <div class="signal-list">
+      <div class="signal-item"><div class="signal-marker">→</div><div class="signal-text">Your business is growing, but it feels like it's running you instead of the other way around.</div></div>
+      <div class="signal-item"><div class="signal-marker">→</div><div class="signal-text">You've accumulated a pile of software tools that don't talk to each other — and nobody owns the whole picture.</div></div>
+      <div class="signal-item"><div class="signal-marker">→</div><div class="signal-text">You keep hearing about AI but have no idea what it actually does for a business like yours.</div></div>
+      <div class="signal-item"><div class="signal-marker">→</div><div class="signal-text">A key person leaving would break something important — and that knowledge lives only in their head.</div></div>
+      <div class="signal-item"><div class="signal-marker">→</div><div class="signal-text">You're about to make a significant technology decision and you don't have a trusted advisor in the room.</div></div>
+      <div class="signal-item"><div class="signal-marker">→</div><div class="signal-text">You're a 10–200 person business and "enterprise software" is overkill — but you've outgrown the basics.</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- SERVICES — ENTRY POINT -->
+<section id="services">
+  <div class="section-inner">
+    <p class="section-eyebrow">Where to Start</p>
+    <h2 class="section-title">Not sure where you are? Start here.</h2>
+    <p class="section-body">Every Proof engagement begins with clarity. Our entry-point offerings are bounded, flat-fee, and deliver something tangible — whether or not you choose to work with us further.</p>
+
+    <div class="services-grid" style="margin-top:3rem;">
+      <div class="service-card">
+        <div class="service-tag">$2,000 · Flat Fee</div>
+        <h3>The Decision Audit</h3>
+        <p>One focused 90-minute session on a single consequential decision. We prepare in advance, deliver a clear recommendation with reasoning, and follow up with a written summary.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-tag">$2,500 · Flat Fee</div>
+        <h3>The Operations Scan</h3>
+        <p>A structured interview and written report naming your top five operational friction points, their estimated cost, and a prioritized path forward. Delivered in five business days.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-tag">$3,000 · Flat Fee</div>
+        <h3>The AI Readiness Check</h3>
+        <p>Where does your business actually stand with AI? A written brief with a five-dimension readiness rating and a concrete next-step recommendation. No jargon.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-tag">$3,500 · Flat Fee</div>
+        <h3>The Stack Audit</h3>
+        <p>A systematic review of every tool and platform you run — what it costs, what it does, how it connects, and what should change. Delivered as a visual map and prioritized report.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-tag">$4,500 · Flat Fee</div>
+        <h3>The People & Process Map</h3>
+        <p>Structured interviews with up to four team members. A visual process map and written analysis identifying redundancy, bottlenecks, and single points of failure.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-tag">$7,500 · 90 Days</div>
+        <h3>The Bridge</h3>
+        <p>For clients between a diagnostic and an ongoing relationship. One Big Picture Conversation, two async deep-dives, and a 90-day check-in. A structured start to something longer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ADVISORY PACKAGES -->
+<section class="packages" id="advisory">
+  <div class="section-inner packages-intro">
+    <p class="section-eyebrow">Ongoing Advisory</p>
+    <h2 class="section-title">The Clearinghouse Series</h2>
+    <p class="section-body">Annual advisory relationships built around the Big Picture Conversation — a two-part, principal-led engagement delivered within a single week. Session one: we listen. Session two: we deliver. Every package includes written summary artifacts and asynchronous access to the Proof team.</p>
+  </div>
+
+  <div class="section-inner">
+    <div class="package-list">
+      <div class="package-item">
+        <div>
+          <div class="package-name">Signal</div>
+          <div class="package-desc">2 Big Picture Conversations per year. An annual outside perspective for stable businesses that want to stay sharp.</div>
+        </div>
+        <div class="package-price"><span class="amount">$5,000</span><span class="period">per year</span></div>
+      </div>
+      <div class="package-item">
+        <div>
+          <div class="package-name">Bearing</div>
+          <div class="package-desc">4 BPCs per year (quarterly). For businesses in active motion — growing, shifting, or navigating meaningful change.</div>
+        </div>
+        <div class="package-price"><span class="amount">$12,000</span><span class="period">per year</span></div>
+      </div>
+      <div class="package-item">
+        <div>
+          <div class="package-name">Heading</div>
+          <div class="package-desc">6 BPCs per year plus one full-day onsite. Proactive quarterly briefs from Proof. For businesses navigating multi-year strategic decisions.</div>
+        </div>
+        <div class="package-price"><span class="amount">$28,000</span><span class="period">per year</span></div>
+      </div>
+      <div class="package-item">
+        <div>
+          <div class="package-name">Course</div>
+          <div class="package-desc">Monthly BPCs, two onsites, rolling action tracker, and a dedicated Proof principal. For businesses where everything is in motion at once.</div>
+        </div>
+        <div class="package-price"><span class="amount">$55,000</span><span class="period">per year</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- CHAIR SERIES -->
+<section id="chairs">
+  <div class="section-inner">
+    <p class="section-eyebrow">Embedded Leadership</p>
+    <h2 class="section-title">The Chair Series</h2>
+    <p class="section-body">A dedicated Proof expert embedded in your organization — functioning as a genuine member of your leadership team. Named, consistent, reachable on a dedicated channel. This is not outsourced IT. It is a seat at the table.</p>
+
+    <div class="chair-grid">
+      <div class="chair-card">
+        <div class="chair-name">The Operations Chair</div>
+        <div class="chair-role">COO Equivalent</div>
+        <div class="chair-desc">Owns operational workflow design, process improvement, vendor rationalization, and staff onboarding to systems. Keeps your operations running well as your business evolves.</div>
+        <div class="chair-price">$4,500 / month</div>
+      </div>
+      <div class="chair-card">
+        <div class="chair-name">The Technology Chair</div>
+        <div class="chair-role">CTO Equivalent</div>
+        <div class="chair-desc">Owns your technology roadmap, stack evaluation, vendor selection, active build oversight, and security posture. Makes sure your technology serves your business, not the other way around.</div>
+        <div class="chair-price">$5,500 / month</div>
+      </div>
+      <div class="chair-card">
+        <div class="chair-name">The Information Chair</div>
+        <div class="chair-role">CIO Equivalent</div>
+        <div class="chair-desc">Owns data architecture, reporting systems, operational dashboards, data governance, and staff data literacy. Ensures the right information reaches the right people.</div>
+        <div class="chair-price">$5,000 / month</div>
+      </div>
+      <div class="chair-card">
+        <div class="chair-name">The Intelligence Chair</div>
+        <div class="chair-role">CAIO Equivalent</div>
+        <div class="chair-desc">Owns your AI strategy end-to-end — identifying opportunities, integrating tools into real workflows, building your AI playbook, and keeping pace as the landscape shifts.</div>
+        <div class="chair-price">$6,000 / month</div>
+      </div>
+      <div class="chair-card featured">
+        <div class="chair-name">The Full Table</div>
+        <div class="chair-role">All Four Chairs, Unified</div>
+        <div class="chair-desc">A coordinated Proof team across all four domains. Single relationship lead, unified quarterly reviews, four onsites per year, and monthly executive summary. Saves $24,000/year vs. individual Chairs.</div>
+        <div class="chair-price">$13,500 / month · $144,000/year</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="section-inner">
+    <p class="section-eyebrow">Community & Events</p>
+    <h2 class="section-title">Two ways to be in the room.</h2>
+    <p class="section-body">We host two events each year. One is open to all. One is earned.</p>
+
+    <div class="events-grid">
+      <div class="event-card">
+        <div class="event-name">The Proof Gathering</div>
+        <span class="event-tag">Annual · Open to All Clients</span>
+        <p class="event-desc">A 2–3 day working event for SMB operators. Proof principals and invited outside experts. Keynotes, panels, and small-group sessions designed to generate real thinking you can take home. Priced to be worth every dollar.</p>
+        <p class="event-price">From $995 per attendee · Active clients receive one complimentary seat</p>
+      </div>
+      <div class="event-card invite-only">
+        <div class="event-name">The Table</div>
+        <span class="event-tag">Invitation Only · Chair Clients</span>
+        <p class="event-desc">Three days at a genuine retreat property. A small group of Chair clients, a high ratio of Proof experts, and no formal agenda after the first morning. Ad-hoc conversations, small-group sessions, long dinners. The most valuable thing that happens won't be on the schedule.</p>
+        <p class="event-price">Included with qualifying Chair engagements · Travel at cost</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Most businesses wait too long<br>to get this kind of help.</h2>
+  <p>The first step is a conversation. Tell us where you are, and we'll tell you honestly whether and how we can help.</p>
+  <a href="#start" class="btn-light">Start the Conversation</a>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="form-section" id="start">
+  <div class="section-inner form-wrap">
+    <p class="section-eyebrow">Get in Touch</p>
+    <h2 class="section-title">Let's talk about your business.</h2>
+    <p class="section-body">We respond to every inquiry personally, within one business day. No automated sequences, no sales funnel. Just a real conversation.</p>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" placeholder="Jane">
+      </div>
+      <div class="form-group">
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" placeholder="Smith">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="jane@yourcompany.com">
+      </div>
+      <div class="form-group">
+        <label for="company">Company</label>
+        <input type="text" id="company" placeholder="Your Company">
+      </div>
+      <div class="form-group full">
+        <label for="interest">What interests you most?</label>
+        <select id="interest">
+          <option value="">— Select one —</option>
+          <option>I want to start with a diagnostic or assessment</option>
+          <option>I'm interested in an advisory package</option>
+          <option>I want to learn about the Chair Series</option>
+          <option>I'm curious about The Proof Gathering</option>
+          <option>I just want to have a conversation</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label for="message">Tell us where you are</label>
+        <textarea id="message" placeholder="What's the thing that keeps coming up that you haven't been able to solve?"></textarea>
+      </div>
+    </div>
+
+    <div class="form-submit">
+      <button type="button">Send My Message</button>
+      <p class="form-note">We'll respond within one business day. No pitch. No pressure.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2025 Proof Systems & Humans &nbsp;·&nbsp; proofgeist.com &nbsp;·&nbsp; All rights reserved
+</footer>
+
+</body>
+</html>
