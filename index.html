@@ -123,7 +123,20 @@
   /* FOOTER */
   footer { background: var(--ink); color: rgba(255,255,255,0.4); padding: 2rem; text-align: center; font-family: 'Helvetica Neue', sans-serif; font-size: 0.78rem; letter-spacing: 0.04em; border-top: 1px solid rgba(255,255,255,0.1); }
 
-  /* FORM */
+  /* PHOTOS */
+  .photo-strip { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; padding: 6px; background: var(--rule); }
+  .photo-strip img { width: 100%; height: 280px; object-fit: cover; display: block; }
+  @media (max-width: 640px) { .photo-strip { grid-template-columns: 1fr; } .photo-strip img { height: 220px; } }
+
+  /* TESTIMONIALS */
+  .testimonials { background: var(--stone); }
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5px; background: var(--rule); border: 1px solid var(--rule); margin-top: 3rem; }
+  .testi-card { background: var(--mist); padding: 2.25rem; }
+  .testi-quote { font-size: 1rem; line-height: 1.75; font-style: italic; color: var(--ink); margin-bottom: 1.25rem; }
+  .testi-attr { font-family: 'Helvetica Neue', sans-serif; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sage); }
+  .pull-quote { background: var(--warm); color: white; padding: 4rem 2rem; text-align: center; }
+  .pull-quote blockquote { max-width: 680px; margin: 0 auto; font-size: clamp(1.2rem, 2.8vw, 1.7rem); line-height: 1.5; font-style: italic; }
+  .pull-quote cite { display: block; margin-top: 1.5rem; font-family: 'Helvetica Neue', sans-serif; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.8; font-style: normal; }
   .form-section { background: white; }
   .form-wrap { max-width: 560px; margin: 0 auto; }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2.5rem; }
@@ -145,7 +158,7 @@
 <!-- PASSWORD GATE -->
 <div id="gate" style="position:fixed;inset:0;z-index:9999;background:var(--mist);display:flex;align-items:center;justify-content:center;padding:2rem;">
   <div style="max-width:380px;width:100%;text-align:center;">
-    <p style="font-family:'Helvetica Neue',sans-serif;font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage);margin-bottom:1.5rem;">Proof Systems & Humans</p>
+    <p style="font-family:'Helvetica Neue',sans-serif;font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage);margin-bottom:1.5rem;">Proof Positive</p>
     <h2 style="font-size:1.6rem;font-weight:normal;margin-bottom:0.75rem;">This page is private.</h2>
     <p style="font-size:0.92rem;color:var(--mid);margin-bottom:2rem;">Enter the password to continue.</p>
     <input id="gate-input" type="password" placeholder="Password" style="width:100%;padding:0.85rem 1rem;border:1px solid var(--rule);border-radius:2px;font-family:'Georgia',serif;font-size:1rem;background:white;outline:none;text-align:center;margin-bottom:0.75rem;">
@@ -169,7 +182,7 @@
 </script>
 
 <nav>
-  <a href="#" class="nav-logo">Proof</a>
+  <a href="#" class="nav-logo">Proof Positive</a>
   <ul class="nav-links">
     <li><a href="#what-we-do">What We Do</a></li>
     <li><a href="#services">Services</a></li>
@@ -182,7 +195,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <p class="hero-eyebrow">Proof Systems & Humans</p>
+    <p class="hero-eyebrow">Proof Positive</p>
     <h1>Your business has outgrown<br>how it <em>operates.</em></h1>
     <p class="hero-body">We work with owner-led businesses as their ongoing operations partner — the trusted advisor for how your company actually runs. Like your accountant, but for everything else.</p>
     <div class="hero-actions">
@@ -211,6 +224,15 @@
   </blockquote>
 </div>
 
+<!-- PHOTO STRIP -->
+<div class="photo-strip">
+  <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80" alt="Team collaborating around a table">
+  <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80" alt="Business discussion in a bright office">
+  <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=80" alt="Professionals reviewing work together">
+</div>
+
+<hr class="rule">
+
 <!-- WHO THIS IS FOR -->
 <section>
   <div class="section-inner">
@@ -226,6 +248,16 @@
     </div>
   </div>
 </section>
+
+<hr class="rule">
+
+<!-- PULL QUOTE 2 -->
+<div class="pull-quote">
+  <blockquote>
+    "We'd been running on gut instinct and spreadsheets for six years. After one Proof engagement, we finally understood what our business actually costs to run — and where we were leaving money on the table."
+    <cite>— Operations Director, Professional Services Firm</cite>
+  </blockquote>
+</div>
 
 <hr class="rule">
 
@@ -288,7 +320,7 @@
           <div class="package-name">Signal</div>
           <div class="package-desc">2 Big Picture Conversations per year. An annual outside perspective for stable businesses that want to stay sharp.</div>
         </div>
-        <div class="package-price"><span class="amount">$5,000</span><span class="period">per year</span></div>
+        <div class="package-price"><span class="amount">$6,000</span><span class="period">per year</span></div>
       </div>
       <div class="package-item">
         <div>
@@ -309,7 +341,7 @@
           <div class="package-name">Course</div>
           <div class="package-desc">Monthly BPCs, two onsites, rolling action tracker, and a dedicated Proof principal. For businesses where everything is in motion at once.</div>
         </div>
-        <div class="package-price"><span class="amount">$55,000</span><span class="period">per year</span></div>
+        <div class="package-price"><span class="amount">$56,000</span><span class="period">per year</span></div>
       </div>
     </div>
   </div>
@@ -387,6 +419,42 @@
 
 <hr class="rule">
 
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-inner">
+    <p class="section-eyebrow">What Clients Say</p>
+    <h2 class="section-title">Proof in practice.</h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <p class="testi-quote">"I've worked with consultants before who delivered big decks and disappeared. Proof is different — they stay in it with you. Our Technology Chair has become one of the most valuable relationships in our business."</p>
+        <p class="testi-attr">CEO, Healthcare Services Group</p>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote">"The Operations Scan felt almost too simple to be worth it. Then we read the report. They named four things that had been costing us real money for years — things nobody had ever put a number on."</p>
+        <p class="testi-attr">Owner, Regional Logistics Company</p>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote">"We came in for an AI Readiness Check expecting to be told we were behind. Instead, we left with a clear, realistic plan. No hype. Just three specific things to do first."</p>
+        <p class="testi-attr">Managing Partner, Independent School Network</p>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote">"The Gathering was the best professional event I've attended in a decade — and I've been to a lot of them. The ratio of useful conversation to filler was unlike anything else."</p>
+        <p class="testi-attr">Founder, Boutique Professional Services Firm</p>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote">"We were making our technology decisions by accident. Proof's quarterly cadence changed that completely. Now we have a roadmap, and someone accountable for keeping us on it."</p>
+        <p class="testi-attr">COO, Private Members Club Group</p>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote">"I was skeptical about what an outside firm could really know about our operations. Three months in, our Information Chair knew our data better than we did — and that's not an exaggeration."</p>
+        <p class="testi-attr">VP Operations, Multi-Site Healthcare Practice</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
 <!-- CTA -->
 <section class="cta-section">
   <h2>Most businesses wait too long<br>to get this kind of help.</h2>
@@ -443,7 +511,7 @@
 </section>
 
 <footer>
-  &copy; 2025 Proof Systems & Humans &nbsp;·&nbsp; proofgeist.com &nbsp;·&nbsp; All rights reserved
+  &copy; 2025 Proof Positive &nbsp;·&nbsp; proofgeist.com &nbsp;·&nbsp; All rights reserved
 </footer>
 
 </body>
